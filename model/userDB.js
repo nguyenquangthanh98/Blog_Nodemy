@@ -42,6 +42,7 @@ var userSchema = Schema({
 var postSchema = new Schema({
     title: String,
     content: String,
+    img:String,
     idComment: [{
         type: ObjectId,
         ref: "comment"
