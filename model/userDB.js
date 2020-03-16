@@ -34,6 +34,7 @@ var userSchema = Schema({
         type: Number,
         default: 1 //1:admin , 2:user
     }
+
 }, {
     collection: "user"
 })
