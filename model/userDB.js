@@ -52,7 +52,7 @@ var postSchema = new Schema({
 
 //db Comment
 var commentSchema = new Schema({
-    content: String
+    content: String,
 }, {
     collection: "comment"
 })
