@@ -6,7 +6,7 @@ var bcrypt = require('bcrypt')
 var db = require('../model/userDB');
 var sendMail = require('./sendMail')
 var saltRounds = 10;
-var userModel = require('../config/configDb');
+// var userModel = require('../config/configDb');
 
 
 // dang ki
@@ -63,15 +63,13 @@ router.get('/authEmail/:token', function(req, res, next) {
 // cach khac
 
 router.get('/checkUserModel', (req, res, next) => {
-    userModel.find()
+    db.userModel.find()
         .populate('idPost')
         .populate('idComment')
         .then((data) => {
             res.json(data)
         })
 })
-
-
 
 
 module.exports = router;
