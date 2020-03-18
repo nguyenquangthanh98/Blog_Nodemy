@@ -32,7 +32,7 @@ router.post("/sign-up", function (req, res, next) {
                     }, 'caothaito', {
                         expiresIn: "1h"
                     })
-                    sendMail('vukind@gmail.com', 'THU XAC NHAN', `link xac nhan <a href="${req.protocol}://${req.get('host')}/authEmail/${token}">here</a>`)
+                    sendMail(req.body.email, 'THU XAC NHAN', `link xac nhan <a href="${req.protocol}://${req.get('host')}/authEmail/${token}">here</a>`)
                     res.json(`${req.protocol}://${req.get('host')}/api/authEmail/${token}`);
                 })
             })
