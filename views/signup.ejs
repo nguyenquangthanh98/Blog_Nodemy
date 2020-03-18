@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <link rel="stylesheet" href="/stylesheets/signup.css">
+
+</head>
+
+<body>
+
+
+    <div class="container">
+
+
+
+
+
+        <div class="card bg-light">
+            <article class="card-body mx-auto" style="max-width: 400px;">
+                <h4 class="card-title mt-3 text-center">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">Tạo tài khoản</font>
+                    </font>
+                </h4>
+                <p class="text-center">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">Bắt đầu với tài khoản miễn phí của bạn</font>
+                    </font>
+                </p>
+                <p>
+
+                    <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;"> &nbsp; Đăng nhập qua facebook</font>
+                        </font>
+                    </a>
+                </p>
+                <p class="divider-text">
+                    <span class="bg-light">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">HOẶC LÀ</font>
+                        </font>
+                    </span>
+                </p>
+                <form>
+                    <!-- form-group// -->
+                    <p style="color: red;" id="thongbao"> </p>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                        </div>
+                        <input id="email" name="email" class="form-control" placeholder="Địa chỉ email" type="email">
+                    </div> <!-- form-group// -->
+                    <!-- form-group// -->
+                    <!-- form-group end.// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        <input id="password" name="password" class="form-control" placeholder="Tạo mật khẩu"
+                            type="password">
+
+                    </div> <!-- form-group// -->
+
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        <input id="password2" name="password2" class="form-control" placeholder="lặp lại mật khẩu"
+                            type="password">
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <button id="button" type="button" class="btn btn-primary btn-block">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;"> Tạo tài khoản </font>
+                            </font>
+                        </button>
+                    </div> <!-- form-group// -->
+                    <p class="text-center">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Có một tài khoản? </font>
+                        </font><a href="">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">Đăng nhập</font>
+                            </font>
+                        </a>
+                    </p>
+                </form>
+            </article>
+        </div> <!-- card.// -->
+
+    </div>
+
+</body>
+<script>
+    $("#button").click(function () {
+
+
+        // Bước 1: Lấy giá trị của username và password
+        var email = $("#email").val();
+        var password = $("#password").val();
+        var password2 = $("#password2").val();
+
+        // Bước 2: Kiểm tra dữ liệu hợp lệ hay không
+        if (!email) {
+            $('#thongbao').html('Bạn chưa nhập tên đăng nhập');
+        } else if (!password) {
+            $('#thongbao').html('Bạn chưa nhập  mật khẩu');
+        } else if (!password2) {
+            $('#thongbao').html('Bạn chưa nhập  lại mật khẩu');
+        } else if (password !== password2) {
+            $('#thongbao').html('mật khẩu không giống nhau');
+        } else {
+            $.ajax({
+                type: "post",
+                url: "/api/sign-up",
+                data: "data",
+                dataType: "dataType",
+                success: function (response) {
+
+                }
+            });
+        }
+
+
+
+
+
+
+
+
+    });
+</script>
+
+</html>

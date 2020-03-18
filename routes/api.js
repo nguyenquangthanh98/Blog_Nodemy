@@ -9,7 +9,15 @@ var saltRounds = 10;
 var userModel = require('../config/configDb');
 
 
+
+
 // dang ki
+
+router.get('/signup', function(req, res, next) {
+    res.render('signup');
+});
+
+
 router.post("/sign-up", function(req, res, next) {
     let email = req.body.email;
     let password = req.body.password;
