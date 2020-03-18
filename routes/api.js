@@ -6,7 +6,7 @@ var bcrypt = require('bcrypt')
 var db = require('../model/userDB');
 var sendMail = require('./sendMail')
 var saltRounds = 10;
-var userModel = require('../config/configDb');
+// var userModel = require('../config/configDb');
 
 
 
@@ -40,7 +40,7 @@ router.post("/sign-up", function(req, res, next) {
                     }, 'caothaito', {
                         expiresIn: "1h"
                     })
-                    sendMail('vukind@gmail.com', 'THU XAC NHAN', `link xac nhan <a href="${req.protocol}://${req.get('host')}/authEmail/${token}">here</a>`)
+                    sendMail(req.body.email, 'THU XAC NHAN', `link xac nhan <a href="${req.protocol}://${req.get('host')}/authEmail/${token}">here</a>`)
                     res.json(`${req.protocol}://${req.get('host')}/api/authEmail/${token}`);
                 })
             })
@@ -71,7 +71,7 @@ router.get('/authEmail/:token', function(req, res, next) {
 // cach khac
 
 router.get('/checkUserModel', (req, res, next) => {
-    userModel.find()
+    db.userModel.find()
         .populate('idPost')
         .populate('idComment')
         .then((data) => {

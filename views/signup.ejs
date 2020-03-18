@@ -105,7 +105,7 @@
 </body>
 <script>
     $("#button").click(function () {
-
+        
 
         // Bước 1: Lấy giá trị của username và password
         var email = $("#email").val();
@@ -122,13 +122,16 @@
         } else if (password !== password2) {
             $('#thongbao').html('mật khẩu không giống nhau');
         } else {
+            body={
+                email:email,
+                password:password}
             $.ajax({
                 type: "post",
                 url: "/api/sign-up",
-                data: "data",
-                dataType: "dataType",
+                data: body,
+                
                 success: function (response) {
-
+                    alert(response)
                 }
             });
         }
