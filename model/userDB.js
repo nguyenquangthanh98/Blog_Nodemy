@@ -76,7 +76,7 @@ userModel.find({})
     .populate('idComment')
     .then(function(data) {
         {
-            console.log(data);
+            // console.log(data);
         }
     })
 
