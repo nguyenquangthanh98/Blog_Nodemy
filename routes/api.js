@@ -17,34 +17,49 @@ router.get('/signup', function(req, res, next) {
     res.render('signup');
 });
 
+router.get('/login', function(req, res, next) {
+    res.render('login');
+});
+
 
 router.post("/sign-up", function(req, res, next) {
     let email = req.body.email;
     let password = req.body.password;
-    db.userModel.find({
+    db.userModel.findOne({
             'local.email': email
-        }).then(function(data) {
-            console.log(data);
         })
-        .then(function(checkEmail) {
+        .then(function(checkEmail) {           
             if (checkEmail) {
                 return res.json('da ton tai')
-            }
-            bcrypt.hash(password, saltRounds, function(err, hash) {
-                db.userModel.create({
-                    'local.email': email,
-                    'local.password': hash
-                }).then(function(data) {
-                    let token = jwt.sign({
-                        id: data._id
-                    }, 'caothaito', {
-                        expiresIn: "1h"
+            }else{
+                bcrypt.hash(password, saltRounds, function(err, hash) {
+                    
+                    db.userModel.create({
+                        'local.email': email,
+                        'local.password': hash
+                    }).then(function(data) {
+                     
+                        let token = jwt.sign({
+                            id: data._id
+                        }, 'caothaito', {
+                            expiresIn: "1h"
+                        })
+                        let to = req.body.email
+                        
+                        
+                        let subject = 'THU XAC NHAN'
+                        let html = `link xac nhan <a href="${req.protocol}://${req.get('host')}/authEmail/${token}">here</a>`
+                        sendMail(to,subject , html)
+                        // res.json(`${req.protocol}://${req.get('host')}/api/authEmail/${token}`);
+                        res.json({
+                            token
+                        });
                     })
-                    sendMail(req.body.email, 'THU XAC NHAN', `link xac nhan <a href="${req.protocol}://${req.get('host')}/authEmail/${token}">here</a>`)
-                    res.json(`${req.protocol}://${req.get('host')}/api/authEmail/${token}`);
                 })
-            })
-        }).catch(function(err) {
+            }
+          
+        })
+        .catch(function(err) {
             console.log(err);
         })
 })
