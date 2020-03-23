@@ -1,17 +1,8 @@
 const express = require('express');
-// const ejs = require('ejs');
-// const bodyParser = require('body-parser');
 const multer = require('multer');
 const router = express.Router();
 const path = require('path');
 
-//set views file
-// app.set('views', path.join(__dirname, 'views'));
-// //set view engine
-// app.set('view engine', 'ejs');
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
-// For Multer Storage
 var multerStorage = multer.diskStorage({
     destination: function(req, file, callback) {
         callback(null, path.join(__dirname, '../public/upLoad'))
@@ -60,12 +51,7 @@ function checkFileType(file, cb) {
 
 // Base index route
 router.get('/', function(req, res) {
-    // const uploadStatus = req.app.locals.uploadStatus;
-    // req.app.locals.uploadStatus = null;
-    res.render('file_upload', {
-        // title: 'Up Load file ảnh',
-        // uploadStatus: uploadStatus
-    });
+    res.render('file_upload');
 
 });
 
@@ -73,9 +59,20 @@ router.get('/', function(req, res) {
 router.post("/singleFile", function(req, res) {
     upload(req, res, (err) => {
         if (err) {
-            res.json('Error: Chỉ up đc ảnh ( đuôi JPG,JPEG,PNG,GIF!)');
+            res.json({
+                msg: err
+            });
         } else {
-            res.json('Up thành công');
+            if (req.file == undefined) {
+                res.json({
+                    msg: 'Error: No File Selected!'
+                });
+            } else {
+                res.json({
+                    msg: 'File Uploaded!',
+                    file: `uploads/${req.file.filename}`
+                });
+            }
         }
     });
 });
@@ -83,41 +80,18 @@ router.post("/singleFile", function(req, res) {
 router.post("/multipleFile", function(req, res) {
     uploadMul(req, res, (err) => {
         if (err) {
-            res.json('Error: Chỉ up đc ảnh ( đuôi JPG,JPEG,PNG,GIF!)');
+            res.json({
+                msg: err
+            });
         } else {
-            res.json('Up thành công');
+
+            res.json({
+                msg: 'File Uploaded!',
+            });
+
         }
     });;
 });
-// Base index route
-// router.get('/upFile', function(req, res) {
-//     const uploadStatus = req.app.locals.uploadStatus;
-//     req.app.locals.uploadStatus = null;
-//     res.render('file_upload', {
-//         title: 'Up Load file ảnh',
-//         uploadStatus: uploadStatus
-//     });
-// });
-//route for single file upload
-// router.post("/singleFile", multerSigleUpload.single('singleImage'), function(req, res) {
-//     const file = req.file
-//     console.log(file);
-//     if (!file) {
-//         return res.end("Please choose file to upload!");
-//     }
-//     req.app.locals.uploadStatus = true;
-//     res.redirect('/');
-// });
-//route for multiple file upload
-// router.post("/multipleFile", function(req, res) {
-//     multerMultipleUpload(req, res, function(err) {
-//         if (err) {
-//             return res.end("Files uploading unsucessfully!");
-//         }
-//         req.app.locals.uploadStatus = true;
-//         res.redirect('/');
-//     });
-// });
 
 
 module.exports = router
