@@ -44,7 +44,7 @@ router.post('/post', async (req, res) => {
             content: req.body.content,
             title: req.body.title,
             img: req.body.img,
-            idUser: req.body.idUser
+            idUser: req.token.idUser
         })
         res.json({
             error: false,

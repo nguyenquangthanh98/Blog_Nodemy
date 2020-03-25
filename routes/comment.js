@@ -35,7 +35,7 @@ router.get('/comment/:idpost', async function (req, res, next) {
         })
     }
 
-});
+}),
 
 
 router.post('/comment', async (req, res) => {
@@ -45,6 +45,26 @@ router.post('/comment', async (req, res) => {
             content: "Bai học tạm",
             user: '5e6da8aea5bde31eacf1f002',
             post: '5e6da86772f8561728b30ac5'
+        })
+        res.json({
+            error: false,
+            data: commentNew
+        });
+    } catch (error) {
+        res.json({
+            error: true,
+            data: error
+        })
+    }
+});
+
+router.post('/comment/:idpost', async (req, res) => {
+
+    try {
+        let commentNew = await db.commentModel.create({
+            content: res.body.content,
+            user:res.token.user ,
+            post: res.params.post
         })
         res.json({
             error: false,
