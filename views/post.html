@@ -50,29 +50,17 @@
 
     $("#save").click(function () {
         var data = quill.getContents();
-        var content = [];
-        content.push(data.ops)
-        console.log(content);
-        // $.ajax({
-        //     url:"/api/post",
-        //     method: 'POST',
-        //     data: {
-        //         content: data
-        //     }
-        // }).then(function(data){
-        //     alert("Them bai thanh cong")
-        //     // window.location.href="/api/get-post"
-        // })
-
+        // window.contentData = quill.getContents();
         $.ajax({
             url: "/api/post",
             type: "post",
             data: {
-                content: content
-            }
+                content: JSON.stringify(data.ops)
+            },
+
         }).then(function (data) {
             alert("Them thanh cong");
-          // window.location.href="/api/get-post"
+          window.location.href="/api/get-post"
         })
 
     });

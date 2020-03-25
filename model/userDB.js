@@ -42,7 +42,6 @@ var userSchema = Schema({
 var postSchema = new Schema({
     title: String,
     content: Array,
-    img:String,
     idUser: [{
         type: ObjectId,
         ref: "user"
@@ -69,51 +68,8 @@ var commentSchema = new Schema({
 var userModel = mongoose.model('user', userSchema);
 var postModel = mongoose.model('post', postSchema);
 var commentModel = mongoose.model('comment', commentSchema);
-
-
-userModel.find({})
-    .populate('idPost')
-    .populate('idComment')
-    .then(function(data) {
-        {
-            // console.log(data);
-        }
-    })
-
-
-// userModel.create({
-//     username: 'Thanh',
-//     local: {
-//         email: 'nguyenthanh',
-//         password: '123'
-//     },
-//     facebook: {
-//         email: 'thanh@gmail',
-//     },
-//     idPost: '5e6f8e9e351c7121e820eda7',
-//     idComment: ['5e6f8e0a3499a9341ced8b0c', '5e6f8e0a3499a9341ced8b0d'],
-//     active: false,
-//     block: false,
-//     type: 1
-// })
-
-
-
-// postModel.create({
-//     title: 'Cách trở thành master',
-//     content: 'Chăm code',
-//     idComment: ['5e6f8e0a3499a9341ced8b0d', '5e6f8e0a3499a9341ced8b0c']
-
-// })
-
-
-// commentModel.create({
-//     content: "Bai học tạm"
-// }, {
-//     content: "ok"
-// })
-
-module.exports = {userModel,
+module.exports = {
+    userModel,
     postModel,
     commentModel
    }

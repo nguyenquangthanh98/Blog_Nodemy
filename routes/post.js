@@ -12,7 +12,7 @@ router.get('/post', function (req, res, next) {
 });
 
 
-router.get('/get-post', async function (req, res, next) {
+router.get('/get-all-post', async function (req, res, next) {
     try {
         var Show = await db.postModel.find();
         res.json({
@@ -52,8 +52,6 @@ router.post('/post', async (req, res) => {
     try {
         let postNew = await db.postModel.create({
             content: req.body.content
-            // img: req.body.img,
-            // idUser: req.token.idUser
         })
         res.json({
             error: false,
