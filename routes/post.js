@@ -1,8 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../model/userDB');
+var path = require("path");
 
-router.get('/post', async function (req, res, next) {
+router.get('/get-post', function (req, res, next) {
+    res.render("getPost")
+});
+
+router.get('/post', function (req, res, next) {
+    res.sendFile(path.join(__dirname, "../views/post.html"))
+});
+
+
+router.get('/get-post', async function (req, res, next) {
     try {
         var Show = await db.postModel.find();
         res.json({
@@ -38,17 +48,16 @@ router.get('/post/:idpost', async function (req, res, next) {
 });
 
 router.post('/post', async (req, res) => {
-
+    console.log(req.body);
     try {
-        let commentNew = await db.postModel.create({
-            content: req.body.content,
-            title: req.body.title,
-            img: req.body.img,
-            idUser: req.token.idUser
+        let postNew = await db.postModel.create({
+            content: req.body.content
+            // img: req.body.img,
+            // idUser: req.token.idUser
         })
         res.json({
             error: false,
-            data: commentNew
+            data: "them thanh cong"
         });
     } catch (error) {
         res.json({

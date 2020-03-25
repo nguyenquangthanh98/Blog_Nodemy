@@ -41,7 +41,7 @@ var userSchema = Schema({
 // database Post
 var postSchema = new Schema({
     title: String,
-    content: String,
+    content: Array,
     img:String,
     idUser: [{
         type: ObjectId,
