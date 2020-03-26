@@ -15,7 +15,8 @@
         "morgan": "~1.9.1",
         "node-modules": "^1.0.1",
         "nodemon": "^2.0.2",
-        "quill": "^1.3.6"
+        "quill": "^1.3.6",
+        "quill-delta-to-html": "^0.11.0"
     },
     "main": "app.js",
     "author": "",

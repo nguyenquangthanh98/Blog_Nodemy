@@ -11,41 +11,52 @@
 </head>
 
 <body>
-    <div id="editor"></div>
-    <button id="btn">click</button>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<!-- <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script> -->
 
 <script>
 
-    var quill = new Quill('#editor');
+    // var quill = new Quill('#editor');
 
-    // var ops = [{"attributes":{"bold":true},"insert":"asdad"},{"insert":"\nsr"},{"attributes":{"italic":true},"insert":"ffsfs"},{"insert":"\n"}]
+    // // var ops = [{"attributes":{"bold":true},"insert":"asdad"},{"insert":"\nsr"},{"attributes":{"italic":true},"insert":"ffsfs"},{"insert":"\n"}]
 
-    // quill.setContents(ops, 'api');
+    // // quill.setContents(ops, 'api');
 
     $.ajax({
         url: "/api/get-all-post",
         type: "get"
     }).then(function (data) {
-        var ops = data.data;
-        // console.log(ops);
+        // var ops = data.data;
+        // // console.log(ops);
 
-        var content = []
+        // var content = []
 
-        ops.forEach(element => {
-            var value = element.content[0]
-            content = content.concat(JSON.parse(value))
-            // console.log(value);
-            console.log(JSON.parse(value));
-        });
-        quill.setContents(content, 'api');
-
+        // ops.forEach(element => {
+        //     var value = element.content[0]
+        //     content = content.concat(JSON.parse(value))
+        //     // console.log(value);
+        //     console.log(JSON.parse(value));
+        // });
+        // quill.setContents(content, 'api');
+        // console.log($("editor").getHTML());
         // quill.setContents({ "ops": [{ "insert": data }] }, 'api');
-
-    })
+      
+        data.data.forEach(element => {
+            var template = `
+                <div class="nd">
+                    <h1>${element.title}</h1>
+                    <div class="content">
+                        ${element.content[0]}
+                    </div>  
+                </div>
+            `
+            $('body').append(template)
+        });
+      
+    });
 
 </script>
 
