@@ -12,7 +12,7 @@ router.get('/post', function (req, res, next) {
 });
 
 
-router.get('/get-post', async function (req, res, next) {
+router.get('/get-all-post', async function (req, res, next) {
     try {
         var Show = await db.postModel.find();
         res.json({
