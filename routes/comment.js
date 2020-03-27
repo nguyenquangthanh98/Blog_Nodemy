@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../model/userDB');
 
 /* GET users listing. */
-router.get('/comment', async function (req, res, next) {
+router.get('/comment', async function(req, res, next) {
     try {
         var Show = await db.commentModel.find();
         res.json({
@@ -18,7 +18,7 @@ router.get('/comment', async function (req, res, next) {
     }
 
 });
-router.get('/comment/:idpost', async function (req, res, next) {
+router.get('/comment/:idpost', async function(req, res, next) {
     var id = req.params.idpost
     try {
         var ShowId = await db.commentModel.findById(id);
@@ -38,7 +38,7 @@ router.get('/comment/:idpost', async function (req, res, next) {
 }),
 
 
-router.post('/comment', async (req, res) => {
+router.post('/comment', async(req, res) => {
 
     try {
         let commentNew = await db.commentModel.create({

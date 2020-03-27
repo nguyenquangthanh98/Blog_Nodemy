@@ -34,6 +34,7 @@ var userSchema = Schema({
         type: Number,
         default: 1 //1:admin , 2:user
     }
+
 }, {
     collection: "user"
 })
@@ -42,11 +43,11 @@ var userSchema = Schema({
 var postSchema = new Schema({
     title: String,
     content: Array,
-    img:String,
-    idUser: [{
-        type: ObjectId,
-        ref: "user"
-    }]
+    // img:String,
+    // idUser: [{
+    //     type: ObjectId,
+    //     ref: "user"
+    // }]
 }, {
     collection: "post"
 })
@@ -54,6 +55,7 @@ var postSchema = new Schema({
 //db Comment
 var commentSchema = new Schema({
     content: String,
+
     user: [{
         type: ObjectId,
         ref: "user"
@@ -113,7 +115,8 @@ userModel.find({})
 //     content: "ok"
 // })
 
-module.exports = {userModel,
+module.exports = {
+    userModel,
     postModel,
     commentModel
-   }
+}
