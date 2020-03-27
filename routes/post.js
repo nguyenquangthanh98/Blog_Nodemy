@@ -51,7 +51,8 @@ router.post('/post', async (req, res) => {
     console.log(req.body);
     try {
         let postNew = await db.postModel.create({
-            content: req.body.content
+            content: req.body.content,
+            title: req.body.title
             // img: req.body.img,
             // idUser: req.token.idUser
         })
