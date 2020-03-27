@@ -53,17 +53,6 @@
         var content = [];
         content.push(data.ops)
         console.log(content);
-        // $.ajax({
-        //     url:"/api/post",
-        //     method: 'POST',
-        //     data: {  
-        //         content: data
-        //     }
-        // }).then(function(data){
-        //     alert("Them bai thanh cong")
-        //     // window.location.href="/api/get-post"
-        // })
-
         $.ajax({
             url: "/api/post",
             type: "post",

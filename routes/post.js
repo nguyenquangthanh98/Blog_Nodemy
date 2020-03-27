@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../model/userDB');
 var path = require("path");
+var QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
 
 router.get('/get-post', function (req, res, next) {
     res.render("getPost")
@@ -47,12 +48,25 @@ router.get('/post/:idpost', async function (req, res, next) {
 
 });
 
-router.post('/post', async (req, res) => {
-    console.log(req.body);
+router.post('/post',async  (req, res) => {
+
+
+
+
+    // TypeScript / ES6:
+    // import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html'; 
+
+
     try {
+        var deltaOps =JSON.parse(req.body.content)
+    
+        var cfg = {};
+    
+        var converter = new QuillDeltaToHtmlConverter(deltaOps, cfg);
+    
+        var html = converter.convert(); 
         let postNew = await db.postModel.create({
-            content: req.body.content,
-            title: req.body.title
+            content: html
             // img: req.body.img,
             // idUser: req.token.idUser
         })
