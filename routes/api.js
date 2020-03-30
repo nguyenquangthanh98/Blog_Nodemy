@@ -12,13 +12,8 @@ var userMidleware = require('../middleware/userMidleware');
 
 // dang ki
 
-router.get('/signup', function(req, res, next) {
-    res.render('signup');
-});
 
-router.get('/login', function(req, res, next) {
-    res.render('login');
-});
+
 
 
 router.post("/sign-up", function(req, res, next) {
@@ -88,7 +83,7 @@ router.post('/sign-in', function(req, res, next) {
         let password = req.body.password
         db.userModel.find({ 'local.email': email })
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 if (data.length == 0) {
                     return res.json('Tài khoản không tồn tại')
                 }

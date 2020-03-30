@@ -25,7 +25,7 @@
                         <font style="vertical-align: inherit;">Đăng Nhập tài khoản</font>
                     </font>
                 </h4>
-                <p class="text-center">
+                <!-- <p class="text-center">
                     <font style="vertical-align: inherit;">
                         <font style="vertical-align: inherit;">Bắt đầu với tài khoản miễn phí của bạn</font>
                     </font>
@@ -45,7 +45,7 @@
                         </font>
                     </span>
                 </p>
-                <form>
+                <form> -->
                     <!-- form-group// -->
                     <p style="color: red;" id="thongbao"> </p>
                     <div class="form-group input-group">
@@ -79,7 +79,7 @@
                         <font style="vertical-align: inherit;">
                             <font style="vertical-align: inherit;">Chưa có tài khoản? </font>
                         </font>
-                        <a href="/api/signup">
+                        <a href="/signup">
                             <font style="vertical-align: inherit;">
                                 <font style="vertical-align: inherit;">Đăng ký</font>
                             </font>
@@ -95,7 +95,7 @@
 </body>
 <script>
     $("#button").click(function() {
-
+console.log("click");
 
         // Bước 1: Lấy giá trị của username và password
         var email = $("#email").val();
@@ -107,22 +107,23 @@
             $('#thongbao').html('Bạn chưa nhập tên đăng nhập');
         } else if (!password) {
             $('#thongbao').html('Bạn chưa nhập  mật khẩu');
-        } else if (!password2) {
-            $('#thongbao').html('Bạn chưa nhập  lại mật khẩu');
-        } else if (password !== password2) {
-            $('#thongbao').html('mật khẩu không giống nhau');
-        } else {
+        }  else {
             body = {
                 email: email,
                 password: password
             }
             $.ajax({
                 type: "post",
-                url: "/api/login",
+                url: "/login",
                 data: body,
 
-                success: function(response) {
-                    alert(response)
+               
+            }).then(function(data){
+                if(data.error===true){
+                    $('#thongbao').html(data.message); 
+                }else{
+                    
+                    window.location.href='/home'
                 }
             });
         }

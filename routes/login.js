@@ -18,7 +18,9 @@ router.post('/',function(req,res,next) {
         })
         res.cookie("token",token,{maxAge:24*60*60*1000})
         res.json("Hãy chuyển trang hay làm gì đó ở dòng 20, trong đường dẫn /routers/login.js")
+        // res.redirect('/home')
         })
       })(req, res)
 })
+
 module.exports =  router 

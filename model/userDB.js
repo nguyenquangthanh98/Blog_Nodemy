@@ -4,7 +4,7 @@ const ObjectId = Schema.ObjectId;
 
 // database User
 var userSchema = Schema({
-    username: String,
+    
     local: {
         email: String,
         password: String
@@ -32,7 +32,7 @@ var userSchema = Schema({
     },
     type: {
         type: Number,
-        default: 1 //1:admin , 2:user
+        default: 2 //1:admin , 2:user
     }
 
 }, {
@@ -44,9 +44,11 @@ var postSchema = new Schema({
     title: String,
     content: String,
     img: String,
-    idComment: [{
+    
+    img:String,
+    idUser: [{
         type: ObjectId,
-        ref: "comment"
+        ref: "user"
     }]
 }, {
     collection: "post"
@@ -73,14 +75,14 @@ var postModel = mongoose.model('post', postSchema);
 var commentModel = mongoose.model('comment', commentSchema);
 
 
-// userModel.find({})
-//     .populate('idPost')
-//     .populate('idComment')
-//     .then(function(data) {
-//         {
-//             console.log(data);
-//         }
-//     })
+userModel.find({})
+    .populate('idPost')
+    .populate('idComment')
+    .then(function(data) {
+        {
+            console.log(data);
+        }
+    })
 
 
 // userModel.create({
@@ -92,8 +94,8 @@ var commentModel = mongoose.model('comment', commentSchema);
 //     facebook: {
 //         email: 'thanh@gmail',
 //     },
-//     idPost: '5e6da8aea5bde31eacf1f002',
-//     idComment: ['5e6da86772f8561728b30ac5', '5e6da86772f8561728b30ac6'],
+//     idPost: '5e6f8e9e351c7121e820eda7',
+//     idComment: ['5e6f8e0a3499a9341ced8b0c', '5e6f8e0a3499a9341ced8b0d'],
 //     active: false,
 //     block: false,
 //     type: 1
@@ -104,7 +106,7 @@ var commentModel = mongoose.model('comment', commentSchema);
 // postModel.create({
 //     title: 'Cách trở thành master',
 //     content: 'Chăm code',
-//     idComment: ['5e6da86772f8561728b30ac5', '5e6da86772f8561728b30ac6']
+//     idComment: ['5e6f8e0a3499a9341ced8b0d', '5e6f8e0a3499a9341ced8b0c']
 
 // })
 
