@@ -27,5 +27,13 @@
     "main": "app.js",
     "author": "",
     "license": "ISC",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/nguyenquangthanh98/Blog_Nodemy.git"
+    },
+    "bugs": {
+      "url": "https://github.com/nguyenquangthanh98/Blog_Nodemy/issues"
+    },
+    "homepage": "https://github.com/nguyenquangthanh98/Blog_Nodemy#readme",
     "description": ""
 }

@@ -43,7 +43,7 @@ var userSchema = Schema({
 var postSchema = new Schema({
     title: String,
     content: String,
-    img:String,
+    img: String,
     idComment: [{
         type: ObjectId,
         ref: "comment"
@@ -55,6 +55,7 @@ var postSchema = new Schema({
 //db Comment
 var commentSchema = new Schema({
     content: String,
+
     user: [{
         type: ObjectId,
         ref: "user"
@@ -114,7 +115,8 @@ var commentModel = mongoose.model('comment', commentSchema);
 //     content: "ok"
 // })
 
-module.exports = {userModel,
+module.exports = {
+    userModel,
     postModel,
     commentModel
-   }
+}
