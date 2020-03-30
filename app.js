@@ -9,9 +9,10 @@ var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
 var commentRouter = require('./routes/comment');
 var upFile = require('./routes/upFile');
-
+var login = require("./routes/login")
 var app = express();
-
+var passport = require("passport")
+require('./config/passport');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -27,9 +28,8 @@ app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 app.use('/api', commentRouter);
 app.use('/api', upFile)
-
-
-// catch 404 and forward to error handler
+app.use("/login", login)
+    // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
 });
