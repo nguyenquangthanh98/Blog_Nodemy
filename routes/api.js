@@ -62,6 +62,6 @@ router.get('/authEmail/:token', function (req, res, next) {
 
 // cach khac
 
-
+//the la xong ? vai /login
 
 module.exports = router;
