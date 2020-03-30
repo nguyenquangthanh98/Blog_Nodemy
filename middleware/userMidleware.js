@@ -9,11 +9,16 @@ function checkAdmin(req, res, next) {
         if (token) {
             var jwtDecoded = jwt.verify(token, 'caothaito');
             console.log(jwtDecoded);
-            if (jwtDecoded.data.type === 1) {
-                next()
-            } else {
-                res.json('bạn là user')
-            }
+            dbUser.userModel.findById({
+                _id: req.body.id
+            }).then((data) => {
+                if (jwtDecoded.data.type === 1) {
+                    next()
+                } else {
+                    res.json('bạn là user')
+                }
+            })
+
         } else {
             // res.redirect('/api/login')
             res.json('loix')
