@@ -10,6 +10,7 @@ var apiRouter = require('./routes/api');
 var commentRouter = require('./routes/comment');
 var upFile = require('./routes/upFile');
 var login = require("./routes/login")
+
 var app = express();
 var passport = require("passport")
 require('./config/passport');

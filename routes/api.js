@@ -81,7 +81,7 @@ router.get('/authEmail/:token', function(req, res, next) {
     }
 })
 
-// api Đăng nhập Local
+// api Đăng nhập Local không dùng passport
 
 router.post('/sign-in', function(req, res, next) {
         let email = req.body.email
