@@ -21,4 +21,12 @@ router.get('/', function(req, res, next) {
     console.log('Request for about page recieved');
     res.render('single');
   });
+  router.get('/menu', (req, res) => {
+    console.log('Request for about page recieved');
+    res.render('MenuAd');
+  });
+  router.get('/quanlybaiviet', (req, res) => {
+    console.log('Request for about page recieved');
+    res.render('post');
+  });
 module.exports = router;
