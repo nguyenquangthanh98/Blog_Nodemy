@@ -10,9 +10,13 @@ var apiRouter = require('./routes/api');
 var commentRouter = require('./routes/comment');
 var postRouter = require('./routes/post');
 var upFile = require('./routes/upFile');
+var ResetPassword = require('./routes/ResetPassword');
+
+var login = require("./routes/login")
 
 var app = express();
-
+var passport = require("passport")
+require('./config/passport');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -29,9 +33,14 @@ app.use('/api', apiRouter);
 app.use('/api', commentRouter);
 app.use('/api', postRouter);
 app.use('/api', upFile)
+app.use('/api', ResetPassword);
+
 
 
 // catch 404 and forward to error handler
+app.use("/login", login);
+
+    // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
 });
@@ -46,5 +55,6 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
 
 module.exports = app;

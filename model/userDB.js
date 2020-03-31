@@ -32,7 +32,7 @@ var userSchema = Schema({
     },
     type: {
         type: Number,
-        default: 1 //1:admin , 2:user
+        default: 2 //1:admin , 2:user
     }
 
 }, {
