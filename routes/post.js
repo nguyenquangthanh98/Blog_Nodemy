@@ -12,7 +12,6 @@ router.get('/post', function (req, res, next) {
     res.sendFile(path.join(__dirname, "../views/post.html"))
 });
 
-
 router.get('/get-all-post', async function (req, res, next) {
     try {
         var Show = await db.postModel.find();
@@ -26,7 +25,6 @@ router.get('/get-all-post', async function (req, res, next) {
             data: error
         });
     }
-
 });
 
 router.get('/post/:idpost', async function (req, res, next) {
@@ -45,28 +43,21 @@ router.get('/post/:idpost', async function (req, res, next) {
             data: error
         })
     }
-
 });
 
 router.post('/post',async  (req, res) => {
 
-
-
-
     // TypeScript / ES6:
     // import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html'; 
 
-
     try {
         var deltaOps =JSON.parse(req.body.content)
-    
         var cfg = {};
-    
         var converter = new QuillDeltaToHtmlConverter(deltaOps, cfg);
-    
         var html = converter.convert(); 
         let postNew = await db.postModel.create({
-            content: html
+            content: html,
+            title:html
             // img: req.body.img,
             // idUser: req.token.idUser
         })
