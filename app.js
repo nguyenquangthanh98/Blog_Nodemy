@@ -9,6 +9,8 @@ var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
 var commentRouter = require('./routes/comment');
 var upFile = require('./routes/upFile');
+var resetPassword = require('./routes/newPassword')
+
 
 var app = express();
 
@@ -28,6 +30,7 @@ app.use('/api', apiRouter);
 app.use('/api', commentRouter);
 app.use('/api', upFile)
 
+app.use('/api', resetPassword);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
