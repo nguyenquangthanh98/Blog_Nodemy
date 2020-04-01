@@ -4,8 +4,8 @@ var db = require('../model/userDB');
 var path = require("path");
 var QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
 
-router.get('/get-post', function (req, res, next) {
-    res.render("getPost")
+router.get('/single', function (req, res, next) {
+    res.render("single")
 });
 
 router.get('/post', function (req, res, next) {
@@ -51,13 +51,14 @@ router.post('/post',async  (req, res) => {
     // import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html'; 
 
     try {
-        var deltaOps =JSON.parse(req.body.content)
+        var deltaOps =JSON.parse(req.body.content)  
         var cfg = {};
         var converter = new QuillDeltaToHtmlConverter(deltaOps, cfg);
         var html = converter.convert(); 
+        console.log(req.body.title);
         let postNew = await db.postModel.create({
             content: html,
-            title:html
+            title:req.body.title
             // img: req.body.img,
             // idUser: req.token.idUser
         })

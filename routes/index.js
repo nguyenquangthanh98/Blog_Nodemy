@@ -12,11 +12,11 @@ router.get('/about', userMidleware.checkXacThuc, (req, res) => {
     console.log('Request for about page recieved');
     res.render('about');
 });
-router.get('/new', userMidleware.checkXacThuc, (req, res) => {
+router.get('/new', (req, res) => {
     console.log('Request for about page recieved');
     res.render('new');
 });
-router.get('/contact', userMidleware.checkXacThuc, (req, res) => {
+router.get('/contact', (req, res) => {
     console.log('Request for about page recieved');
     res.render('contact');
 });
@@ -28,7 +28,7 @@ router.get('/admin', userMidleware.checkXacThuc, userMidleware.checkAdmin, (req,
     console.log('Request for about page recieved');
     res.render('MenuAd');
 });
-router.get('/admin/quanlybaiviet', (req, res) => {
+router.get('/admin/quanlybaiviet', userMidleware.checkXacThuc, userMidleware.checkAdmin,(req, res) => {
     console.log('Request for about page recieved');
     res.render('post');
 });

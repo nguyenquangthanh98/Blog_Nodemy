@@ -20,23 +20,9 @@
 <script>
 
     $.ajax({
-        url: "/api/get-all-post",
+        url: "/single",
         type: "get"
     }).then(function (data) {
-        // var ops = data.data;
-        // // console.log(ops);
-
-        // var content = []
-
-        // ops.forEach(element => {
-        //     var value = element.content[0]
-        //     content = content.concat(JSON.parse(value))
-        //     // console.log(value);
-        //     console.log(JSON.parse(value));
-        // });
-        // quill.setContents(content, 'api');
-        // console.log($("editor").getHTML());
-
         data.data.forEach(element => {
             var template = `
                 <div class="nd">
@@ -44,7 +30,8 @@
                      <h1>${element.title}</h1>
                     </div>
                     <div class="content">
-                        ${element.content[0]}
+                        <p>${element.content[0]}</p>
+
                     </div>  
                 </div>
             `
