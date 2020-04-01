@@ -75,14 +75,14 @@ var postModel = mongoose.model('post', postSchema);
 var commentModel = mongoose.model('comment', commentSchema);
 
 
-userModel.find({})
-    .populate('idPost')
-    .populate('idComment')
-    .then(function(data) {
-        {
-            console.log(data);
-        }
-    })
+// userModel.find({})
+//     .populate('idPost')
+//     .populate('idComment')
+//     .then(function(data) {
+//         {
+//             console.log(data);
+//         }
+//     })
 
 
 // userModel.create({

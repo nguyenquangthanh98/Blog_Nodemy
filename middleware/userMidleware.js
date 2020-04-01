@@ -8,7 +8,7 @@ function checkAdmin(req, res, next) {
     try {
         if (token) {
             var jwtDecoded = jwt.verify(token, 'caothaito');
-            console.log(jwtDecoded);
+            // console.log(jwtDecoded);
             dbUser.userModel.findById({
                 _id: jwtDecoded.id
             }).then((data) => {
