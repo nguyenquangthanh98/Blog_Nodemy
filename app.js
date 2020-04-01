@@ -34,7 +34,6 @@ app.use('/api', apiRouter);
 app.use('/api', commentRouter);
 app.use('/api', postRouter);
 app.use('/api', upFile)
-app.use('/api', ResetPassword);
 
 
 app.use('/api', resetPassword);
