@@ -4,5 +4,4 @@ mongoose.connect('mongodb://localhost/project3_Blog', {
     useUnifiedTopology: true
 });
 
-
 module.exports = mongoose;

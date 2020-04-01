@@ -90,7 +90,7 @@
                     <p class="text-center">
                         <font style="vertical-align: inherit;">
                             <font style="vertical-align: inherit;">Có một tài khoản? </font>
-                        </font><a href="/api/login">
+                        </font><a href="/login">
                             <font style="vertical-align: inherit;">
                                 <font style="vertical-align: inherit;">Đăng nhập</font>
                             </font>
@@ -118,15 +118,14 @@
         // Bước 2: Kiểm tra dữ liệu hợp lệ hay không
 
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-      var  decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    
         if (!filter.test(email)) {
             $('#thongbao').html('Hãy nhập email hợp lệ.\nExample@gmail.com');            
             email.focus;
             return false;
         }
-         else if (!decimal.test(password)) {
-            $('#thongbao').html('Mật khẩu từ 8 đến 15 ký tự có chứa ít nhất một chữ cái viết thường, một chữ cái viết hoa, một chữ số và một ký tự đặc biệt');
-        } else if (!password2) {
+   
+        else if (!password2) {
             $('#thongbao').html('Bạn chưa nhập  lại mật khẩu');
         } else if (password !== password2) {
             $('#thongbao').html('mật khẩu không giống nhau');

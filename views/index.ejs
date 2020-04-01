@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
+<html lang="en">
+  <% include ./include/head %>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside id="colorlib-aside" role="complementary" class="js-fullheight">
+      <!-- begin header  -->
+      <% include ./include/header %>
+      
+      <!-- end header  -->
+      <!-- begin footer  -->
+      <% include ./include/footer %>
+		  
+      
+      <!-- end footer  -->
+
+			
+		</aside> <!-- END COLORLIB-ASIDE -->
+	</div><!-- END COLORLIB-PAGE -->
+<!-- begin content  -->
+      <% include ./include/content %>
+      
+<!-- end content  -->
+  <!-- loader -->
+  
+  <% include ./include/loader %>
+
+  <% include ./include/scripts %>
+    
   </body>
 </html>
