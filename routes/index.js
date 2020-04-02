@@ -20,7 +20,7 @@ router.get('/contact', (req, res) => {
     console.log('Request for about page recieved');
     res.render('contact');
 });
-router.get('/single', userMidleware.checkXacThuc, (req, res) => {
+router.get('/single/:id', userMidleware.checkXacThuc, (req, res) => {
     console.log('Request for about page recieved');
     res.render('single');
 });

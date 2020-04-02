@@ -16,7 +16,10 @@
       <div class="container">
         <div class="row d-flex">
           <div class="col-xl-8 py-5 px-md-5">
-            <div class="row pt-md-4">
+            <!-- <div class="row pt-md-4"> -->
+
+              <div id="hienthi"></div>
+<!-- 
               <div class="col-md-12">
                 <div class="blog-entry ftco-animate d-md-flex">
                   <a href="/single" class="img img-2"
@@ -36,8 +39,10 @@
                     <p><a href="/single" class="btn-custom">Đọc thêm <span class="ion-ios-arrow-forward"></span></a></p>
                   </div>
                 </div>
-              </div>
-            </div><!-- END-->
+              </div> -->
+
+
+            <!-- </div> -->
             <div class="row">
               <div class="col">
                 <div class="block-27">
@@ -149,9 +154,50 @@
   </div><!-- END COLORLIB-MAIN -->
 </body>
 
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
   integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
   integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+
+  $.ajax({
+    url: "/api/get-all-post",
+    type: "get"
+  }).then(function (data) {
+    data.data.forEach(element => {
+      var template = `
+          <div class="row pt-md-4">
+
+              <div class="col-md-12">
+                <div class="blog-entry ftco-animate d-md-flex fadeInUp ftco-animated">
+                  <a href="single/${element._id}" class="img img-2" style="background-image: url(/stylesheets/images/image_1.jpg);"></a>
+                    <div class="text text-2 pl-md-4">
+                      <h3 class="mb-2"><a href="single/${element._id}">${element.title}</a></h3>
+                        <div class="meta-wrap">
+                          <p class="meta">
+                          <span><a href="single/${element._id}"><i class="icon-folder-o mr-2"></i>Travel</a></span>
+                        <span><i class="icon-comment2 mr-2"></i>5 Comment</span>
+                      </p>
+                    </div>
+                  <p class="mb-4">${element.content[0]}</p>
+                <p><a href="single/${element._id}" class="btn-custom">Đọc thêm <span class="ion-ios-arrow-forward"></span></a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+ 
+            `
+
+      console.log(element);
+      $('#hienthi').append(template)
+
+    });
+  });
+
+</script>
 
 </html>
