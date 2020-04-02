@@ -22,7 +22,7 @@ router.get('/comment/:idpost', async function (req, res, next) {
         })
     }
 
-});
+}),
 
 
 router.post('/comment/:idpost', async (req, res) => {
@@ -39,6 +39,26 @@ router.post('/comment/:idpost', async (req, res) => {
             content: comment,
             user: jwtDecoded.id,
             post: idPost
+        })
+        res.json({
+            error: false,
+            data: commentNew
+        });
+    } catch (error) {
+        res.json({
+            error: true,
+            data: error
+        })
+    }
+});
+
+router.post('/comment/:idpost', async (req, res) => {
+
+    try {
+        let commentNew = await db.commentModel.create({
+            content: res.body.content,
+            user:res.token.user ,
+            post: res.params.post
         })
         res.json({
             error: false,
