@@ -45,20 +45,20 @@ router.get('/post/:idpost', async function (req, res, next) {
     }
 });
 
-router.post('/post',async  (req, res) => {
+router.post('/post', async (req, res) => {
 
     // TypeScript / ES6:
     // import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html'; 
 
     try {
-        var deltaOps =JSON.parse(req.body.content)  
+        var deltaOps = JSON.parse(req.body.content)
         var cfg = {};
         var converter = new QuillDeltaToHtmlConverter(deltaOps, cfg);
-        var html = converter.convert(); 
+        var html = converter.convert();
         console.log(req.body.title);
         let postNew = await db.postModel.create({
             content: html,
-            title:req.body.title
+            title: req.body.title
             // img: req.body.img,
             // idUser: req.token.idUser
         })

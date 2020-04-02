@@ -34,7 +34,11 @@
             <div class="row pt-md-4">
 
 
-              <div class="My-post" id="My-post">
+              <div id="baiviet"></div>
+
+
+
+              <!-- <div class="My-post" id="My-post">
                 <h1 class="mb-3">A Loving Heart is the Truest Wisdom</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit,
                   quisquam
@@ -61,7 +65,7 @@
                   <img src="/stylesheets/mages/image_2.jpg" alt="" class="img-fluid">
 
 
-              </div>
+              </div> -->
 
               <div class="tag-widget post-tag-container mb-5 mt-5">
                 <div class="tagcloud">
@@ -253,33 +257,32 @@
 <script>
 
   $.ajax({
-    url: "/api/get-all-post",
+    url: `/api/post/${window.location.href.split("/")[4]}`,
     type: "get"
   }).then(function (data) {
-    data.data.forEach(element => {
-      var template = `
+    console.log(data);
+
+    var template = `
 
           <div class="My-post " id="My-post">
             <div class ="title container">
-              <h1 class="mb-3">${element.title}</h1>
+              <h1 class="mb-3">${data.data.title}</h1>
                 </div>
                   </div>
-                <div class="content container">
-              <p>${element.content[0]}</p>
-                 <p>
+                    <div class="content container">
+                      <p>${data.data.content[0]}</p>
+                      <p>
                   <img src="/stylesheets/images/image_1.jpg" alt="" class="img-fluid">
                 </p>
             </div> 
 
-
           `
 
-      console.log(element);
-      $('body').append(template)
-
-    });
+    console.log(data.data);
+    $('#baiviet').append(template)
 
   });
+
 
 </script>
 
