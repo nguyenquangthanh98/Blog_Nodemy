@@ -42,14 +42,12 @@ var userSchema = Schema({
 // database Post
 var postSchema = new Schema({
     title: String,
-    content: String,
-    img: String,
-    
-    img:String,
-    idUser: [{
-        type: ObjectId,
-        ref: "user"
-    }]
+    content: Array,
+    // img:String,
+    // idUser: [{
+    //     type: ObjectId,
+    //     ref: "user"
+    // }]
 }, {
     collection: "post"
 })
@@ -80,7 +78,7 @@ userModel.find({})
     .populate('idComment')
     .then(function(data) {
         {
-            console.log(data);
+            // console.log(data);
         }
     })
 
