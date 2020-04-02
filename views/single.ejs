@@ -245,8 +245,13 @@
 
     </body>
 
-
-    $.ajax({ url: `/api/post/${window.location.href.split("/")[4]}`, type: "get" }).then(function (data) { console.log(data); var template = `
+    <script>
+        $.ajax({
+            url: `/api/post/${window.location.href.split("/")[4]}`,
+            type: "get"
+        }).then(function(data) {
+            console.log(data);
+            var template = `
 
     <div class="My-post " id="My-post">
         <div class="title container">
@@ -260,9 +265,10 @@
         </p>
     </div>
 
-    ` console.log(data.data); $('#baiviet').append(template) });
-
-
+    `
+            console.log(data.data);
+            $('#baiviet').append(template)
+        });
     </script>
 
 </html>
