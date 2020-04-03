@@ -41,11 +41,7 @@
 
 
 
-                            <div class="tag-widget post-tag-container mb-5 mt-5">
-                                <div class="tagcloud">
-                                    <a href="#" class="tag-cloud-link">edit my post</a>
-                                </div>
-                            </div>
+                            
 
 
 
@@ -57,9 +53,13 @@
                                         
                                         <div id="binhluan"></div>
                                         <div id="binhluanmoi"></div>
-
+                                       
                                         <!-- END comment-list -->
-
+                                        <div class="tag-widget post-tag-container mb-5 mt-5">
+                                            <div class="tagcloud" style="">
+                                                <a href="#" class="tag-cloud-link">Hiển thị thêm comment</a>
+                                            </div>
+                                        </div>
                                         <div class="comment-form-wrap pt-5">
                                             <h3 class="mb-5">Leave a comment</h3>
                                             <form action="#" class="p-3 p-md-5 bg-light">
@@ -136,7 +136,7 @@ body={
         //   console.log(element);
           var commet =    `
                                        
-                                        <div class="comment-body">
+                                        <div class="comment-body blogBox moreBox"  style="display: none;">
                                             <h3>${element.user[0].local.email}</h3>
                                             <div class="meta">October 03, 2018 at 2:21pm</div>
                                             <p>${element.content}</p>
@@ -148,7 +148,20 @@ body={
         $('#coutCommet').html(data.data.length +' Comments')
        
     });
-
+                $( document ).ready(function () {
+                    
+            $(".moreBox").slice(0, 3).show();
+                if ($(".blogBox:hidden").length != 0) {
+                $(".tagcloud").show();
+                }   
+                $(".tagcloud").on('click', function (e) {
+                e.preventDefault();
+                $(".moreBox:hidden").slice(0, 3).slideDown();
+                if ($(".moreBox:hidden").length == 0) {
+                    $(".tagcloud").fadeOut('slow');
+                }
+                });
+            });
 
     $.ajax({
         url: `/api/post/${window.location.href.split("/")[4]}`,
