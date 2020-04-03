@@ -4,7 +4,7 @@ const ObjectId = Schema.ObjectId;
 
 // database User
 var userSchema = Schema({
-    
+
     local: {
         email: String,
         password: String
