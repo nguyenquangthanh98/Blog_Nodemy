@@ -38,23 +38,17 @@
 
                             <div id="baiviet"></div>
 
-
-
-
                             <div class="tag-widget post-tag-container mb-5 mt-5">
                                 <div class="tagcloud">
                                     <a href="#" class="tag-cloud-link">edit my post</a>
                                 </div>
                             </div>
 
-
-
-
                             <div class="pt-5 mt-5">
                                 <h3 class="mb-5 font-weight-bold" id="coutCommet">6 </h3>
                                 <ul class="comment-list">
                                     <li class="comment">
-                                        
+
                                         <div id="binhluan"></div>
                                         <div id="binhluanmoi"></div>
 
@@ -73,12 +67,20 @@
                                                         class="btn py-3 px-4 btn-primary">
                                                 </div>
                                                 <!-- END COL -->
+
+                                                
                                         </div>
+                                        
                             </div>
+                            
         </section>
+
     </div>
+    
     <!-- END COLORLIB-MAIN -->
     </div>
+
+    
     <!-- END COLORLIB-PAGE -->
     <!-- end content  -->
 
@@ -91,25 +93,23 @@
     <% include ./include/scripts %>
 
 </body>
-<script
-src="https://code.jquery.com/jquery-3.4.1.js"
-integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
 <script>
-$( "#postCommet" ).click(function() {
- let comment = $('textarea#message').val();
-// var thought = jQuery("textarea#message").val();
-//   console.log(comment);
-body={
-    comment
-}
-    $.ajax({
-        type: "POST",
-        url: `/api/comment/${window.location.href.split("/")[4]}`,
-        data: body
-    }).then(function (data) {
-        
-          var commet =    `
+    $("#postCommet").click(function () {
+        let comment = $('textarea#message').val();
+        // var thought = jQuery("textarea#message").val();
+        //   console.log(comment);
+        body = {
+            comment
+        }
+        $.ajax({
+            type: "POST",
+            url: `/api/comment/${window.location.href.split("/")[4]}`,
+            data: body
+        }).then(function (data) {
+
+            var commet = `
                                        
                                         <div class="comment-body">
                                             <h3>${data.data.user[0].local.email}</h3>
@@ -120,11 +120,11 @@ body={
             `
             $('#binhluanmoi').append(commet)
 
+        });
+        $("textarea#message").val('');
+
     });
-    $("textarea#message").val('');
-    
-});
-    
+
 
     $.ajax({
         type: "GET",
@@ -133,8 +133,8 @@ body={
 
     }).then(function (data) {
         data.data.forEach(element => {
-        //   console.log(element);
-          var commet =    `
+            //   console.log(element);
+            var commet = `
                                        
                                         <div class="comment-body">
                                             <h3>${element.user[0].local.email}</h3>
@@ -145,8 +145,8 @@ body={
             `
             $('#binhluan').append(commet)
         })
-        $('#coutCommet').html(data.data.length +' Comments')
-       
+        $('#coutCommet').html(data.data.length + ' Comments')
+
     });
 
 
@@ -163,9 +163,6 @@ body={
     </div>
     <div class="content container">
         <p>${data.data.content[0]}</p>
-        <p>
-            <img src="/stylesheets/images/image_1.jpg" alt="" class="img-fluid">
-        </p>
     </div>
 
     `
@@ -174,8 +171,8 @@ body={
     });
 
     function myFunction() {
-     document.getElementById("message").focus();
-}
+        document.getElementById("message").focus();
+    }
 </script>
 
 </html>
