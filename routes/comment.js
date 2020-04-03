@@ -29,6 +29,7 @@ router.post('/comment/:idpost', async (req, res) => {
     var idPost = req.params.idpost
     var token = req.cookies.token
     var comment = req.body.comment
+    console.log(req.body);
     var jwtDecoded = jwt.verify(token, 'caothaito');
 
     // res.json(jwtDecoded.id);
@@ -40,10 +41,23 @@ router.post('/comment/:idpost', async (req, res) => {
             user: jwtDecoded.id,
             post: idPost
         })
-        res.json({
-            error: false,
-            data: commentNew
-        });
+        // res.json({
+        //     error: false,
+        //     data: commentNew
+        // });
+console.log(commentNew);
+        if(commentNew){
+            var ShowId = await db.commentModel.findById({_id:commentNew._id}).populate('user');
+            res.json({
+                    error: false,
+                    data: ShowId
+                });
+        }else{
+            res.json({
+                error: true,
+                data: 'lỗi commet'
+            })
+        }
     } catch (error) {
         res.json({
             error: true,
@@ -52,24 +66,24 @@ router.post('/comment/:idpost', async (req, res) => {
     }
 });
 
-router.post('/comment/:idpost', async (req, res) => {
+// router.post('/comment/:idpost', async (req, res) => {
 
-    try {
-        let commentNew = await db.commentModel.create({
-            content: res.body.content,
-            user:res.token.user ,
-            post: res.params.post
-        })
-        res.json({
-            error: false,
-            data: commentNew
-        });
-    } catch (error) {
-        res.json({
-            error: true,
-            data: error
-        })
-    }
-});
+//     try {
+//         let commentNew = await db.commentModel.create({
+//             content: res.body.content,
+//             user:res.token.user ,
+//             post: res.params.post
+//         })
+//         res.json({
+//             error: false,
+//             data: commentNew
+//         });
+//     } catch (error) {
+//         res.json({
+//             error: true,
+//             data: error
+//         })
+//     }
+// });
 
 module.exports = router;
