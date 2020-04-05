@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var userMidleware = require('../middleware/userMidleware');
-
+var path = require('path')
 
 
 // /* GET home page. */
@@ -37,6 +37,9 @@ router.get('/signup', function(req, res, next) {
 });
 router.get('/login', function(req, res, next) {
     res.render('login');
+});
+router.get('/menu', function (req, res, next) {
+    res.sendFile(path.join(__dirname, "../views/post.html") );
 });
 
 module.exports = router;
