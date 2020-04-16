@@ -43,7 +43,8 @@ router.post("/sign-up", function(req, res, next) {
                         let html = `link xac nhan <a href="${req.protocol}://${req.get('host')}/api/authEmail/${token}">here</a>`
                         sendMail(to, subject, html)
                         return res.json(
-                            'Thành công '
+                            'Thành công',
+                            res.redirect('/login')
                         );
                     })
                 })
@@ -65,7 +66,7 @@ router.get('/authEmail/:token', function(req, res, next) {
             .then(function(data) {
                 if (data) {
                     // res.json('active thành công')
-                    res.redirect('/api/login')
+                    res.redirect('/login')
                 } else {
                     res.json('lỗi')
                 }
