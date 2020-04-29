@@ -12,58 +12,56 @@ var userMidleware = require('../middleware/userMidleware');
 
 // dang ki
 
-
-
-
-
-router.post("/sign-up", function(req, res, next) {
+router.post("/sign-up", function (req, res, next) {
     let email = req.body.email;
     let password = req.body.password;
     db.userModel.findOne({
-            'local.email': email
-        })
-        .then(function(checkEmail) {
-            if (checkEmail) {
-                return res.json('da ton tai')
-            } else {
-                bcrypt.hash(password, saltRounds, function(err, hash) {
+        'local.email': email
+    }).then(function (checkEmail) {
+        if (checkEmail) {
+            return res.json({
+                error: true,
+                message: "Tài khoản đã tồn tại",
+            })
+        } else {
+            bcrypt.hash(password, saltRounds, function (err, hash) {
 
-                    db.userModel.create({
-                        'local.email': email,
-                        'local.password': hash
-                    }).then(function(data) {
+                db.userModel.create({
+                    'local.email': email,
+                    'local.password': hash
+                }).then(function (data) {
 
-                        let token = jwt.sign({
-                            id: data._id
-                        }, 'caothaito', {
-                            expiresIn: "1h"
-                        })
-                        let to = req.body.email
-                        let subject = 'THU XAC NHAN'
-                        let html = `link xac nhan <a href="${req.protocol}://${req.get('host')}/api/authEmail/${token}">here</a>`
-                        sendMail(to, subject, html)
-                        return res.json(
-                            'Thành công',
-                            res.redirect('/login')
-                        );
+                    let token = jwt.sign({
+                        id: data._id
+                    }, 'caothaito', {
+                        expiresIn: "1h"
                     })
+                    let to = req.body.email
+                    let subject = 'THƯ XÁC NHẬN'
+                    let html = `link xac nhan <a href="${req.protocol}://${req.get('host')}/api/authEmail/${token}">here</a>`
+                    sendMail(to, subject, html)
+                    return res.json(
+                        'Thành công',
+                        res.redirect('/login')
+                    );
                 })
-            }
+            })
+        }
 
-        })
-        .catch(function(err) {
+    })
+        .catch(function (err) {
             console.log(err);
         })
 })
 
-router.get('/authEmail/:token', function(req, res, next) {
+router.get('/authEmail/:token', function (req, res, next) {
     try {
         let token = req.params.token;
         let decoded = jwt.verify(token, 'caothaito')
         db.userModel.findByIdAndUpdate({
-                _id: decoded.id
-            }, { $set: { activeMail: true } })
-            .then(function(data) {
+            _id: decoded.id
+        }, { $set: { activeMail: true } })
+            .then(function (data) {
                 if (data) {
                     // res.json('active thành công')
                     res.redirect('/login')
@@ -79,32 +77,32 @@ router.get('/authEmail/:token', function(req, res, next) {
 
 // api Đăng nhập Local không dùng passport
 
-router.post('/sign-in', function(req, res, next) {
-        let email = req.body.email
-        let password = req.body.password
-        db.userModel.find({ 'local.email': email })
-            .then((data) => {
-                // console.log(data);
-                if (data.length == 0) {
-                    return res.json('Tài khoản không tồn tại')
-                }
-                bcrypt.compare(password, data[0].local.password, function(err, value) {
-                    if (err) {
-                        return res.json(err)
+router.post('/sign-in', function (req, res, next) {
+    let email = req.body.email
+    let password = req.body.password
+    db.userModel.find({ 'local.email': email })
+        .then((data) => {
+            // console.log(data);
+            if (data.length == 0) {
+                return res.json('Tài khoản không tồn tại')
+            }
+            bcrypt.compare(password, data[0].local.password, function (err, value) {
+                if (err) {
+                    return res.json(err)
 
-                    } else if (value) {
-                        let token = jwt.sign({ _id: data[0].id, email: data[0].local.email }, 'caothaito', { expiresIn: '1h' })
-                        return res.json(token)
-                    } else {
-                        return res.json({
-                            error: true,
-                            messager: "Sai mật khẩu"
-                        })
-                    }
-                })
+                } else if (value) {
+                    let token = jwt.sign({ _id: data[0].id, email: data[0].local.email }, 'caothaito', { expiresIn: '1h' })
+                    return res.json(token)
+                } else {
+                    return res.json({
+                        error: true,
+                        messager: "Sai mật khẩu"
+                    })
+                }
             })
-    })
-    // cach khac
+        })
+})
+// cach khac
 
 router.get('/checkUserModel', (req, res, next) => {
     db.userModel.find()

@@ -1,21 +1,33 @@
 <nav id="colorlib-main-menu" role="navigation">
     <ul>
-        <li><a href="/login" id="btn-login">Đăng nhập</a></li>
-        <li><a href="#" id="btn-logout">Đăng xuất</a></li>
+
         <li><a href="/">Trang Chủ</a></li>
-        <li><a href="/new">Tin tức mới</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="/contact">Contact</a></li>
+        <li><a href="/login" id="btn-login">Đăng nhập</a></li>
+        <li><a href="#" id="btn-logout">Đăng xuất</a></li>
 
     </ul>
 </nav>
-<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
 <script>
-    $('#btn-logout').click(function() {
-            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
-            window.location.href = '/'
-        })
-        //get value cookie
+    $('#btn-logout').click(function () {
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+        window.location.href = '/'
+    })
+    // if (email) {
+    //     $('#loginSend').css('display', 'none');
+    //     //hiển thị nút logout
+    //     $('#usernameLogin').css('display', 'block').html(email);
+    //     $('#logoutSend').css('display', 'block')
+    // } else {
+    //     $('#loginSend').css('display', 'block');
+    //     //ẩn bỏ nút logout
+    //     $('#usernameLogin').css('display', 'none').html("");
+    //     $('#logoutSend').css('display', 'none')
+    // }
+    //get value cookie
     function getCookie(cname) {
         var name = cname + "=";
         var decodedCookie = decodeURIComponent(document.cookie);
