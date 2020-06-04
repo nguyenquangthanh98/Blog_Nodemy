@@ -8,14 +8,7 @@ var sendMail = require('./sendMail')
 var saltRounds = 10;
 var userMidleware = require('../middleware/userMidleware');
 
-
-
 // dang ki
-
-
-
-
-
 router.post("/sign-up", function(req, res, next) {
     let email = req.body.email;
     let password = req.body.password;

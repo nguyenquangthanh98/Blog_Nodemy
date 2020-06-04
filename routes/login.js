@@ -17,7 +17,8 @@ router.post('/', function(req, res, next) {
                 expiresIn: "1d"
             })
             res.cookie("token", token, { maxAge: 24 * 60 * 60 * 1000 })
-            res.json("Hãy chuyển trang hay làm gì đó ở dòng 20, trong đường dẫn /routers/login.js")
+            // res.json("Hãy chuyển trang hay làm gì đó ở dòng 20, trong đường dẫn /routers/login.js")
+            res.json(token)
                 // res.redirect('/home')
         })
     })(req, res)

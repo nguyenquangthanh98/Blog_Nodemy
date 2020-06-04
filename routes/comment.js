@@ -8,7 +8,7 @@ var jwt = require('jsonwebtoken');
 router.get('/comment/:idpost', async function (req, res, next) {
     var id = req.params.idpost
     try {
-        var ShowId = await db.commentModel.find({post:id}).populate('user');
+        var ShowId = await db.commentModel.find({ post: id }).populate('user');
 
         res.json({
             error: false,
@@ -25,65 +25,46 @@ router.get('/comment/:idpost', async function (req, res, next) {
 }),
 
 
-router.post('/comment/:idpost', async (req, res) => {
-    var idPost = req.params.idpost
-    var token = req.cookies.token
-    var comment = req.body.comment
-    console.log(req.body);
-    var jwtDecoded = jwt.verify(token, 'caothaito');
+    router.post('/comment/:idpost', async (req, res) => {
+        var idPost = req.params.idpost
+        var token = req.cookies.token
+        var comment = req.body.comment
+        console.log(req.body);
+        var jwtDecoded = jwt.verify(token, 'caothaito');
 
-    // res.json(jwtDecoded.id);
-    // console.log(idPost);
+        // res.json(jwtDecoded.id);
+        // console.log(idPost);
 
-    try {
-        let commentNew = await db.commentModel.create({
-            content: comment,
-            user: jwtDecoded.id,
-            post: idPost
-        })
-        // res.json({
-        //     error: false,
-        //     data: commentNew
-        // });
-console.log(commentNew);
-        if(commentNew){
-            var ShowId = await db.commentModel.findById({_id:commentNew._id}).populate('user');
-            res.json({
+        try {
+            let commentNew = await db.commentModel.create({
+                content: comment,
+                user: jwtDecoded.id,
+                post: idPost
+            })
+            // res.json({
+            //     error: false,
+            //     data: commentNew
+            // });
+            console.log(commentNew);
+            if (commentNew) {
+                var ShowId = await db.commentModel.findById({ _id: commentNew._id }).populate('user');
+                res.json({
                     error: false,
                     data: ShowId
                 });
-        }else{
+            } else {
+                res.json({
+                    error: true,
+                    data: 'lỗi commet'
+                })
+            }
+        } catch (error) {
             res.json({
                 error: true,
-                data: 'lỗi commet'
+                data: error
             })
         }
-    } catch (error) {
-        res.json({
-            error: true,
-            data: error
-        })
-    }
-});
+    });
 
-// router.post('/comment/:idpost', async (req, res) => {
-
-//     try {
-//         let commentNew = await db.commentModel.create({
-//             content: res.body.content,
-//             user:res.token.user ,
-//             post: res.params.post
-//         })
-//         res.json({
-//             error: false,
-//             data: commentNew
-//         });
-//     } catch (error) {
-//         res.json({
-//             error: true,
-//             data: error
-//         })
-//     }
-// });
 
 module.exports = router;
